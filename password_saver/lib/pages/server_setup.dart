@@ -33,6 +33,7 @@ class _ServerSetupState extends State<ServerSetup> {
   checkServerAddress(String address) async {
     if (address.isEmpty) {
       notification.warning('Blank Address!');
+      return;
     }
     await serverController.setCurrentServer(address);
     var addressIsValid = await api.get('/api/check', {});
