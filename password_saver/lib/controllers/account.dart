@@ -15,11 +15,17 @@ class AccountController {
 
   setCurrentToken(String email, String password) async {
     final api = Api();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = await api.post('/api/submit_login', {
       "email": email, 
       "password": password,
       "get_token": "yes"
     });
-    print(data);
+    await prefs.setString('token', data);
+  }
+
+  deleteCurrentToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
 }

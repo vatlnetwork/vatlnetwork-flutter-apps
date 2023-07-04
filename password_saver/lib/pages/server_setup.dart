@@ -52,6 +52,12 @@ class _ServerSetupState extends State<ServerSetup> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text(
+              'Connect to a VATLNetwork Cloud Server', 
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
             TextField(
               onSubmitted: (value) {
                 checkServerAddress(value);

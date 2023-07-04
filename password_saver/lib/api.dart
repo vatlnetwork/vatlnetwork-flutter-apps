@@ -10,10 +10,15 @@ class Api {
       throw ArgumentError('No Current Server!');
     } else {
       var url = Uri.http(server, path, params);
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        return response.body;
-      } else {
+      try {
+        var response = await http.get(url);
+        if (response.statusCode == 200) {
+          return response.body;
+        } else {
+          return 'request_error';
+        }
+      }
+      catch(e) {
         return 'request_error';
       }
     }
@@ -21,13 +26,18 @@ class Api {
 
   post(path, params) async {
     final serverController = ServerController();
-    final String server = serverController.getCurrentServer();
+    final String server = await serverController.getCurrentServer();
     if (server == 'none') {
       throw ArgumentError('No Current Server!');
     } else {
       var url = Uri.http(server, path);
-      var response = await http.post(url, body: params);
-      return response.body;
+      try {
+        var response = await http.post(url, body: params);
+        return response.body;
+      }
+      catch(e) {
+        return e.toString();
+      }
     }
   }
 }

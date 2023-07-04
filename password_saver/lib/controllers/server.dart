@@ -15,5 +15,6 @@ class ServerController {
   deleteCurrentServer() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('current_server');
+    await prefs.remove('token');
   }
 }
