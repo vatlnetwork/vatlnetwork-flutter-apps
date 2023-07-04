@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 import 'package:password_saver/pages/server_setup.dart';
@@ -66,8 +67,14 @@ class _AppState extends State<App> {
           page = Login(setPage: getCurrentPage);
           setState(() {});
         } else {
-          page = PasswordSaver(setPage: getCurrentPage);
-          setState(() {});
+          String response = await api.get('/user_info/email', {"token": token});
+          if (response == 'invalid_token') {
+            await accountController.deleteCurrentToken();
+            getCurrentPage();
+          } else {
+            page = PasswordSaver(setPage: getCurrentPage);
+            setState(() {});
+          }
         }
       } else {
         page = Center(

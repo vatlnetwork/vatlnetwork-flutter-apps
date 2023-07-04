@@ -16,6 +16,7 @@ class _ServerSetupState extends State<ServerSetup> {
   final notification = NotificationsController();
   final api = Api();
   final serverController = ServerController();
+  
   late TextEditingController _serverAddressState;
 
   @override

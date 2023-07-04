@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:password_saver/api.dart';
 import 'package:password_saver/controllers/notifications.dart';
@@ -58,7 +59,12 @@ class _LoginState extends State<Login> {
     }
   }
 
-  signup() {
+  signup() async {
+    String currentServer = await serverController.getCurrentServer();
+    final Uri url = Uri.http(currentServer, '/');
+    if (!await launchUrl(url)) {
+      notification.error('There was an error launching the signup URL.');
+    }
   }
 
   resetServer() async {
