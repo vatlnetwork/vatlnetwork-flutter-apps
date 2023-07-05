@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 import 'package:password_saver/pages/server_setup.dart';
