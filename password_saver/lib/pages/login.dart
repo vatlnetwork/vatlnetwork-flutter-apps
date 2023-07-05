@@ -24,6 +24,13 @@ class _LoginState extends State<Login> {
   final accountController = AccountController();
   final serverController = ServerController();
 
+  String currentServer = '';
+
+  getCurrentServer() async {
+    currentServer = await serverController.getCurrentServer();
+    setState(() {});
+  }
+
   @override
   initState() {
     super.initState();
@@ -74,12 +81,18 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    if (currentServer == '') {
+      getCurrentServer();
+    }
+
     return Center(
       child: SizedBox(
         width: 400,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(currentServer),
+            const SizedBox(height: 10),
             TextField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
