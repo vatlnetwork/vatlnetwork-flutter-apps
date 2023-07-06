@@ -39,6 +39,7 @@ class _ServerSetupState extends State<ServerSetup> {
     await serverController.setCurrentServer(address);
     var addressIsValid = await api.get('/api/check', {});
     if (addressIsValid == 'yes') {
+      notification.success('Connected!');
       widget.setPage();
     } else {
       await serverController.deleteCurrentServer();
