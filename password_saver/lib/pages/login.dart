@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(currentServer),
+            Text('Log in to $currentServer'),
             const SizedBox(height: 10),
             TextField(
               decoration: const InputDecoration(

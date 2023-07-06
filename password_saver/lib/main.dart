@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:password_saver/controllers/passwords_controller.dart';
 
 import 'package:password_saver/pages/server_setup.dart';
 import 'package:password_saver/pages/login.dart';
@@ -47,9 +48,10 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final accountController = AccountController();
-  final serverController = ServerController();
-  final api = Api();
+  final AccountController accountController = AccountController();
+  final ServerController serverController = ServerController();
+  final Api api = Api();
+  final PasswordsController passwordsController = PasswordsController();
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -106,7 +108,14 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          currentPage == 'password_saver' ? IconButton(
+            onPressed: () { passwordsController.openCreateDialog(context); },
+            icon: const Icon(Icons.add, color: Colors.green)
+          ) : const SizedBox()
+        ]
+      ),
       drawer: Drawer(
         shape: const RoundedRectangleBorder(),
         child: SingleChildScrollView(
