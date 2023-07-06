@@ -27,21 +27,7 @@ class _PasswordSaverState extends State<PasswordSaver> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(),
-              ElevatedButton(
-                onPressed: () { logOut(); },
-                child: const Text('Log Out', style: TextStyle(color: Colors.red))
-              )
-            ]
-          )
-        ]
-      ),
+      padding: const EdgeInsets.all(8)
     );
   }
 }

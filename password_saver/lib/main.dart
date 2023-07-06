@@ -51,12 +51,16 @@ class _AppState extends State<App> {
   final serverController = ServerController();
   final api = Api();
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   Widget page = const Center(child: Text('Loading...'));
+  String currentPage = '';
 
   getCurrentPage() async {
     String server = await serverController.getCurrentServer();
     if (server == 'none') {
       page = ServerSetup(setPage: getCurrentPage);
+      currentPage = 'server_setup';
       setState(() {});
     } else {
       String isServerValid = await api.get('/api/check', {});
@@ -64,6 +68,7 @@ class _AppState extends State<App> {
         String token = await accountController.getCurrentToken();
         if (token == 'none') {
           page = Login(setPage: getCurrentPage);
+          currentPage = 'login';
           setState(() {});
         } else {
           String response = await api.get('/user_info/email', {"token": token});
@@ -72,6 +77,7 @@ class _AppState extends State<App> {
             getCurrentPage();
           } else {
             page = PasswordSaver(setPage: getCurrentPage);
+            currentPage = 'password_saver';
             setState(() {});
           }
         }
@@ -90,9 +96,29 @@ class _AppState extends State<App> {
     getCurrentPage();
   }
 
+  logOut() {
+    accountController.deleteCurrentToken();
+    _key.currentState!.closeDrawer();
+    getCurrentPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              currentPage == 'password_saver' ? ListTile(
+                title: const Text('Log Out', style: TextStyle(color: Colors.red)),
+                onTap: () { logOut(); }
+              ) : const SizedBox()
+            ]
+          )
+        )
+      ),
       body: page
     );
   }
