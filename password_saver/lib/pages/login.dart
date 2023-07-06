@@ -60,6 +60,7 @@ class _LoginState extends State<Login> {
     });
     if (response == 'success') {
       await accountController.setCurrentToken(_emailState.text, _passwordState.text);
+      notification.success('Loggin In!');
       widget.setPage();
     } else {
       notification.error(response);
