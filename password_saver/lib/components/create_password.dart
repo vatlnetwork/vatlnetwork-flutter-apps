@@ -4,7 +4,9 @@ import 'package:password_saver/controllers/notifications.dart';
 import 'package:password_saver/controllers/passwords.dart';
 
 class CreatePassword extends StatefulWidget {
-  const CreatePassword({super.key});
+  final Function onCreate;
+
+  const CreatePassword({super.key, required this.onCreate});
 
   @override
   State<CreatePassword> createState() => _CreatePasswordState();
@@ -45,6 +47,7 @@ class _CreatePasswordState extends State<CreatePassword> {
       websiteState.text = '';
       usernameState.text = '';
       passwordState.text = '';
+      widget.onCreate();
     } else {
       notification.error(status);
     }

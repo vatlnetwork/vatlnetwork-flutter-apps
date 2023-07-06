@@ -27,12 +27,12 @@ class PasswordsController {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const Dialog(
+        return Dialog(
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: SizedBox(
               width: 350,
-              child: CreatePassword()
+              child: CreatePassword(onCreate: onCreate)
             )
           )
         );

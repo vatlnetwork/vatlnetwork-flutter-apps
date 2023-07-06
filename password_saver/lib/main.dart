@@ -105,7 +105,7 @@ class _AppState extends State<App> {
   }
 
   onCreate() {
-    setState(() {});
+    getCurrentPage();
   }
 
   createPassword(BuildContext context) {
