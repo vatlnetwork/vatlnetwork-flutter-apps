@@ -108,6 +108,7 @@ class _AppState extends State<App> {
       key: _key,
       appBar: AppBar(),
       drawer: Drawer(
+        shape: const RoundedRectangleBorder(),
         child: SingleChildScrollView(
           child: Column(
             children: [
