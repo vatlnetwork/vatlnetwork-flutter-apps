@@ -68,7 +68,7 @@ class _ServerSetupState extends State<ServerSetup> {
               autofocus: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Server Address (ex: vatlnetwork.ddns.net)'
+                labelText: 'Server Address (ex: vatlnetwork.ddns.net:80)'
               ),
               controller: _serverAddressState
             ),
