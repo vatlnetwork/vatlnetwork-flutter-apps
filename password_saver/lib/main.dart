@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:password_saver/controllers/passwords_controller.dart';
+import 'package:password_saver/controllers/passwords.dart';
 
 import 'package:password_saver/pages/server_setup.dart';
 import 'package:password_saver/pages/login.dart';
@@ -104,6 +104,14 @@ class _AppState extends State<App> {
     getCurrentPage();
   }
 
+  onCreate() {
+    setState(() {});
+  }
+
+  createPassword(BuildContext context) {
+    passwordsController.openCreateDialog(context, onCreate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +119,8 @@ class _AppState extends State<App> {
       appBar: AppBar(
         actions: [
           currentPage == 'password_saver' ? IconButton(
-            onPressed: () { passwordsController.openCreateDialog(context); },
+            onPressed: () { createPassword(context); },
+            tooltip: 'New Password',
             icon: const Icon(Icons.add, color: Colors.green)
           ) : const SizedBox()
         ]
