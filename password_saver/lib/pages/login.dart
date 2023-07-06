@@ -25,6 +25,12 @@ class _LoginState extends State<Login> {
   final serverController = ServerController();
 
   String currentServer = '';
+  bool showPassword = false;
+
+  toggleShowPassword() {
+    showPassword = !showPassword;
+    setState(() {});
+  }
 
   getCurrentServer() async {
     currentServer = await serverController.getCurrentServer();
@@ -97,7 +103,8 @@ class _LoginState extends State<Login> {
             TextField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Email'
+                labelText: 'Email',
+                prefixIcon: Icon(Icons.email_outlined)
               ),
               autofocus: true,
               onSubmitted: (value) { login(); },
@@ -105,13 +112,18 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 10),
             TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password'
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: 'Password',
+                prefixIcon: const Icon(Icons.password),
+                suffixIcon: IconButton(
+                  onPressed: () { toggleShowPassword(); },
+                  icon: showPassword ? const Icon(Icons.visibility_outlined) : const Icon(Icons.visibility_off_outlined)
+                )
               ),
               onSubmitted: (value) { login(); },
               controller: _passwordState,
-              obscureText: true
+              obscureText: !showPassword
             ),
             const SizedBox(height: 10),
             SizedBox(
