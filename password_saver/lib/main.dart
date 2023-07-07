@@ -55,6 +55,8 @@ class _AppState extends State<App> {
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
+  final Widget loadingPage = const Center(child: Text('Loading...'));
+
   Widget page = const Center(child: Text('Loading...'));
   String currentPage = '';
 
@@ -95,6 +97,7 @@ class _AppState extends State<App> {
   @override
   initState() {
     super.initState();
+    page = loadingPage;
     getCurrentPage();
   }
 
@@ -105,7 +108,9 @@ class _AppState extends State<App> {
   }
 
   onCreate() {
-    getCurrentPage();
+    currentPage = 'loading_create';
+    page = loadingPage;
+    setState(() {});
   }
 
   createPassword(BuildContext context) {
@@ -114,6 +119,10 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    if (currentPage == 'loading_create') {
+      getCurrentPage();
+    }
+
     return Scaffold(
       key: _key,
       appBar: AppBar(

@@ -59,7 +59,7 @@ class _CreatePasswordState extends State<CreatePassword> {
   }
 
   @override
-  Widget build(BuildContext contexn) {
+  Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +72,7 @@ class _CreatePasswordState extends State<CreatePassword> {
             prefixIcon: Icon(Icons.web)
           ),
           autofocus: true,
-          onSubmitted: (value) { checkPassword(websiteState.text, usernameState.text, passwordState.text); }
+          onSubmitted: (value) { checkPassword(websiteState.text, usernameState.text, passwordState.text); Navigator.pop(context); }
         ),
         const SizedBox(height: 10),
         TextField(
@@ -82,7 +82,7 @@ class _CreatePasswordState extends State<CreatePassword> {
             labelText: 'Username',
             prefixIcon: Icon(Icons.face)
           ),
-          onSubmitted: (value) { checkPassword(websiteState.text, usernameState.text, passwordState.text); }
+          onSubmitted: (value) { checkPassword(websiteState.text, usernameState.text, passwordState.text); Navigator.pop(context); }
         ),
         const SizedBox(height: 10),
         TextField(
@@ -97,13 +97,13 @@ class _CreatePasswordState extends State<CreatePassword> {
               icon: showPassword ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)
             )
           ),
-          onSubmitted: (value) { checkPassword(websiteState.text, usernameState.text, passwordState.text); },
+          onSubmitted: (value) { checkPassword(websiteState.text, usernameState.text, passwordState.text); Navigator.pop(context); },
         ),
         const SizedBox(height: 10),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () { checkPassword(websiteState.text, usernameState.text, passwordState.text); },
+            onPressed: () { checkPassword(websiteState.text, usernameState.text, passwordState.text); Navigator.pop(context); },
             child: const Text('Create')
           ),
         )
