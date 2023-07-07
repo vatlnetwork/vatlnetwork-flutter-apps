@@ -63,6 +63,18 @@ flutter_launcher_icons:
   ios: true
   remove_alpha_ios: true
   resize_behavior: shrink_only
+  web:
+    generate: true
+    image_path: "favicon.ico"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  windows:
+    generate: true
+    image_path: "favicon.ico"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "favicon.ico"
 
 flutter:
 
