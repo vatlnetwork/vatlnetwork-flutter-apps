@@ -11,7 +11,8 @@ class NotificationsController {
           child: const Text('Dismiss', style: TextStyle(color: Colors.white))
         );
       }),
-      background: Colors.green
+      background: Colors.green,
+      position: NotificationPosition.bottom
     );
   }
 

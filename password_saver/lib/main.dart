@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:password_saver/controllers/notifications.dart';
 import 'package:password_saver/controllers/passwords.dart';
 
 import 'package:password_saver/pages/server_setup.dart';
@@ -52,6 +53,7 @@ class _AppState extends State<App> {
   final ServerController serverController = ServerController();
   final Api api = Api();
   final PasswordsController passwordsController = PasswordsController();
+  final NotificationsController notification = NotificationsController();
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -117,6 +119,19 @@ class _AppState extends State<App> {
     passwordsController.openCreateDialog(context, onCreate);
   }
 
+  destroyAllPasswords() async {
+    String response = await passwordsController.destroyAllPasswords();
+    if (response == 'success') {
+      currentPage = 'loading_create';
+      page = loadingPage;
+      notification.success('Completed');
+      _key.currentState!.closeDrawer();
+      setState(() {});
+    } else {
+      notification.error(response);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (currentPage == 'loading_create') {
@@ -139,6 +154,10 @@ class _AppState extends State<App> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              currentPage == 'password_saver' ? ListTile(
+                title: const Text('Delete All', style: TextStyle(color: Colors.red)),
+                onTap: () { destroyAllPasswords(); }
+              ) : const SizedBox(),
               currentPage == 'password_saver' ? ListTile(
                 title: const Text('Log Out', style: TextStyle(color: Colors.red)),
                 onTap: () { logOut(); }

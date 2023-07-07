@@ -23,6 +23,16 @@ class PasswordsController {
     }
   }
 
+  destroyAllPasswords() async {
+    final Api api = Api();
+
+    final AccountController accountController = AccountController();
+
+    final String token = await accountController.getCurrentToken();
+    final String response = await api.post('/saved_passwords/destroy_all', {"token": token});
+    return response;
+  }
+
   openCreateDialog(BuildContext context, Function onCreate) {
     showDialog(
       context: context,

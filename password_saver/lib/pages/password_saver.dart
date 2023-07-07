@@ -32,6 +32,7 @@ class _PasswordSaverState extends State<PasswordSaver> {
   List<Password> passwordsData = <Password>[];
 
   getPasswordData() async {
+    passwordsData = [];
     final String token = await accountController.getCurrentToken();
     var passwordsDataResponse = await api.get('/saved_passwords/read', {"token": token});
     List passwordsDataList = jsonDecode(passwordsDataResponse);
@@ -79,7 +80,8 @@ class _PasswordSaverState extends State<PasswordSaver> {
               id: id,
               website: website,
               username: username,
-              password: password
+              password: password,
+              onUpdate: getPasswordData
             )
           )
         );
