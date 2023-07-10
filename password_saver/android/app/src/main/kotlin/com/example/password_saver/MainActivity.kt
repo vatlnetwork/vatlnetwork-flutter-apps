@@ -1,4 +1,4 @@
-package com.example.password_saver
+package vatlnetwork_password_saver_app
 
 import io.flutter.embedding.android.FlutterActivity
 
