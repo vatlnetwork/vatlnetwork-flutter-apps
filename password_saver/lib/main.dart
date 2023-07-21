@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
+
 import 'package:password_saver/controllers/notifications.dart';
 import 'package:password_saver/controllers/passwords.dart';
-
 import 'package:password_saver/pages/server_setup.dart';
 import 'package:password_saver/pages/login.dart';
 import 'package:password_saver/pages/connection_failure.dart';
 import 'package:password_saver/pages/password_saver.dart';
-
 import 'package:password_saver/controllers/server.dart';
 import 'package:password_saver/controllers/account.dart';
 import 'package:password_saver/api.dart';
